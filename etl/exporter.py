@@ -6,7 +6,7 @@ import logging
 from datetime import datetime
 from pathlib import Path
 
-from .database import ListingDatabase
+from .db import ListingDatabase
 
 logger = logging.getLogger(__name__)
 

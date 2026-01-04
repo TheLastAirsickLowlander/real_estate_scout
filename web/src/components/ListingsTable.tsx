@@ -396,6 +396,17 @@ isStarred
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    globalFilterFn: (row, columnId, filterValue) => {
+      const listing = row.original;
+      const searchableText = [
+        listing.address,
+        listing.description || '',
+        ...(listing.highlights || []),
+        listing.mls_status || '',
+        listing.status || '',
+      ].join(' ').toLowerCase();
+      return searchableText.includes(filterValue.toLowerCase());
+    },
   });
 
   return (
