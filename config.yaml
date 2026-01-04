@@ -1,0 +1,65 @@
+# Real Estate Scout Configuration
+# Edit this file to customize your home search
+
+# Database Connection (PostgreSQL)
+# NOTE: For security, use environment variables instead of hardcoding credentials:
+#   DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
+database:
+  host: "192.168.1.57"
+  port: 5432
+  name: "real_estate_scout"
+  user: "realestatescoutagent"
+  password: ""  # Set DB_PASSWORD environment variable instead
+  enabled: true  # Set to false to disable database persistence
+
+# Search Parameters
+search:
+  center_address: "Orlando, FL"
+  radius_miles: 20
+  listing_type: for_sale  # for_sale, for_rent, sold
+  property_types:
+    - single_family
+  past_days: 120  # 4 months
+
+# Budget Constraints
+budget:
+  min_price: 500000
+  max_price: 850000
+  min_bedrooms: 5
+  min_bathrooms: 3
+
+# Destinations for travel time calculation
+destinations:
+  - name: "Animal Hospital"
+    address: "345 Tuskawilla Rd, Winter Springs, FL 32708"
+  - name: "Airport"
+    address: "1 Jeff Fuqua Blvd, Orlando, FL 32827"
+  - name: "Epcot"
+    address: "Epcot, Bay Lake, FL"
+  - name: "Universal"
+    address: "6601 Adventure Wy, Orlando, FL 32819"
+
+# Travel Preferences (using free OpenRouteService API)
+travel:
+  mode: driving  # driving, cycling, walking
+
+# Output Settings
+output:
+  default_format: table  # table, csv, json
+  include_scores: true   # Include combined ranking score
+  cache_listings_hours: 24  # Cache listings to reduce API calls
+
+# Request Limits (for faster iteration)
+limits:
+  max_listings: 200        # Process only top N listings (0 = all). Set to 2 for quick testing.
+  skip_travel_calculation: false  # true = skip OSRM, use haversine only
+  max_destinations: 4    # Limit destinations to calculate (0 = all)
+
+# OSRM Settings (free public demo server)
+osrm:
+  use_approximate: false  # true = haversine only, false = full OSRM routing
+  rate_limit_delay: 1.1   # seconds between requests (OSRM requires 1.0+)
+
+# Data Freshness
+freshness:
+  listing_max_age_days: 7  # Re-scrape listings older than this
