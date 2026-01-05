@@ -107,6 +107,8 @@ export function MapPageClient({ listings: initialListings, destinations, mode = 
           destinations={destinations}
           selectedId={selectedId}
           onSelect={setSelectedId}
+          onReject={mode === 'active' ? (id) => handleToggleRejected(id, true) : undefined}
+          onToggleStar={handleToggleStar}
         />
       </div>
       <MapListPanel

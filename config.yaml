@@ -14,7 +14,7 @@ database:
 
 # Search Parameters
 search:
-  center_address: "Orlando, FL"
+  center_address: "Winter Garden, FL"
   radius_miles: 20
   listing_type: for_sale  # for_sale, for_rent, sold
   property_types:

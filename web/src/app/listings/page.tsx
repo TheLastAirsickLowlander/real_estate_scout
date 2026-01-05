@@ -136,6 +136,19 @@ export default async function ListingsPage() {
                   </ul>
                 ) : null}
 
+                {l.travel_times && l.travel_times.length > 0 ? (
+                  <div className="mt-2 pt-2 border-t border-[var(--border)]">
+                    <p className="text-xs font-medium text-[var(--text-secondary)] mb-1">Travel Times</p>
+                    <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs text-[var(--text-muted)]">
+                      {l.travel_times.map((tt) => (
+                        <span key={tt.destination_name} className="truncate">
+                          {tt.destination_name}: {tt.duration_minutes} min
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+
                 <div className="mt-3 flex items-center justify-between text-sm text-[var(--text-secondary)]">
                   <span>
                     {l.bedrooms} bd • {l.bathrooms} ba • {l.sqft.toLocaleString()} sqft

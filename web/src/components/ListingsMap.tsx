@@ -66,11 +66,15 @@ const ListingMarker = dynamic(
       icon,
       isSelected,
       onSelect,
+      onReject,
+      onToggleStar,
     }: {
       listing: ListingWithTravel;
       icon: L.DivIcon;
       isSelected: boolean;
       onSelect?: (id: number) => void;
+      onReject?: (id: number) => void;
+      onToggleStar?: (id: number, starred: boolean) => void;
     }) {
       const map = useMap();
       const [markerRef, setMarkerRef] = useState<L.Marker | null>(null);
@@ -97,9 +101,20 @@ const ListingMarker = dynamic(
           <RLPopup>
             <div className="min-w-[200px]">
               <div className="flex items-center gap-2 mb-1">
-                {listing.is_starred && (
-                  <span className="text-amber-500">★</span>
-                )}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onToggleStar?.(listing.id, !listing.is_starred);
+                  }}
+                  className="text-lg hover:scale-110 transition-transform"
+                  title={listing.is_starred ? 'Unstar listing' : 'Star listing'}
+                >
+                  {listing.is_starred ? (
+                    <span className="text-amber-500">★</span>
+                  ) : (
+                    <span className="text-gray-400 hover:text-amber-400">☆</span>
+                  )}
+                </button>
                 <p className="font-semibold text-[var(--text-primary)]">
                   {formatPrice(listing.price)}
                 </p>
@@ -151,6 +166,17 @@ const ListingMarker = dynamic(
                     Zillow &rarr;
                   </a>
                 )}
+                {onReject && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onReject(listing.id);
+                    }}
+                    className="inline-block text-xs text-red-500 hover:underline hover:text-red-600"
+                  >
+                    Reject
+                  </button>
+                )}
               </div>
             </div>
           </RLPopup>
@@ -166,6 +192,8 @@ interface ListingsMapProps {
   destinations: { name: string; lat: number; lng: number }[];
   selectedId?: number | null;
   onSelect?: (id: number) => void;
+  onReject?: (id: number) => void;
+  onToggleStar?: (id: number, starred: boolean) => void;
 }
 
 // SVG icons as data URIs
@@ -221,7 +249,9 @@ export function ListingsMap({
   listings, 
   destinations, 
   selectedId = null,
-  onSelect 
+  onSelect,
+  onReject,
+  onToggleStar,
 }: ListingsMapProps) {
   const [mounted, setMounted] = useState(false);
   const [icons, setIcons] = useState<{
@@ -335,6 +365,8 @@ export function ListingsMap({
             icon={listing.is_starred ? icons.star! : icons.default!}
             isSelected={selectedId === listing.id}
             onSelect={onSelect}
+            onReject={onReject}
+            onToggleStar={onToggleStar}
           />
         ))}
       </MapContainer>
