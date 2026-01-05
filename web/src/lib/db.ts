@@ -1,12 +1,9 @@
 import postgres from 'postgres';
 
-const connectionString = process.env.DATABASE_URL;
-
-if (!connectionString) {
-  throw new Error('DATABASE_URL environment variable is not set');
-}
+const connectionString = process.env.DATABASE_URL ?? '';
 
 // Create a single shared connection for the application
+// Connection will fail at runtime if DATABASE_URL is not set
 export const sql = postgres(connectionString, {
   max: 10,
   idle_timeout: 20,

@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { sql, type PriceHistory } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const history = await sql<(PriceHistory & { address: string; listing_url: string })[]>`

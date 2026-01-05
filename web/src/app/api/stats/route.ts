@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { sql, type Stats } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     // Get counts

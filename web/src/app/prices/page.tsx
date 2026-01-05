@@ -3,6 +3,8 @@ import { PriceChart } from '@/components/PriceChart';
 import { formatPrice, formatNumber } from '@/lib/utils';
 import { ArrowDown, TrendingDown } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 interface PriceHistoryEntry {
   id: number;
   listing_id: number;

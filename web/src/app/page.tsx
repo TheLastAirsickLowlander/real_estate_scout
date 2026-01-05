@@ -11,6 +11,8 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 async function getStats(): Promise<Stats> {
   const [counts] = await sql<{ 
     active_listings: string;

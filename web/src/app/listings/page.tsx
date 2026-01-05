@@ -1,6 +1,8 @@
 import { sql, type ListingWithTravel, type TravelTime } from '@/lib/db';
 import { ListingsTable } from '@/components/ListingsTable';
 
+export const dynamic = 'force-dynamic';
+
 async function getListingsWithTravel(): Promise<ListingWithTravel[]> {
   const baseFields = sql`
     id, address, price, bedrooms, bathrooms, sqft,

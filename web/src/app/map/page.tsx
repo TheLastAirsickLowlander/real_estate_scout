@@ -1,6 +1,8 @@
 import { sql, type ListingWithTravel, type TravelTime, type Destination } from '@/lib/db';
 import { ListingsMap } from '@/components/ListingsMap';
 
+export const dynamic = 'force-dynamic';
+
 async function getListingsWithTravel(): Promise<ListingWithTravel[]> {
   const baseFields = sql`
     id, address, price, bedrooms, bathrooms, sqft,
