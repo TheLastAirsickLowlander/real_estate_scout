@@ -87,7 +87,7 @@ export default async function RejectedPage() {
               Rejected Homes
             </h1>
             <p className="mt-2 text-[var(--text-secondary)]">
-              Hidden listings (you can undo rejection)
+              Hidden listings - click restore to bring back
             </p>
           </div>
           <Link

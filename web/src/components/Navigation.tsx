@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Map, Table, TrendingDown } from 'lucide-react';
+import { Home, Map, Table, TrendingDown, EyeOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
   { href: '/', label: 'Dashboard', icon: Home },
   { href: '/map', label: 'Map', icon: Map },
   { href: '/listings', label: 'Listings', icon: Table },
+  { href: '/rejected', label: 'Rejected', icon: EyeOff },
   { href: '/prices', label: 'Price History', icon: TrendingDown },
 ];
 

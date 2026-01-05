@@ -1,5 +1,5 @@
 import { sql, type ListingWithTravel, type TravelTime, type Destination } from '@/lib/db';
-import { ListingsMap } from '@/components/ListingsMap';
+import { MapPageClient } from '@/components/MapPageClient';
 
 export const dynamic = 'force-dynamic';
 
@@ -149,49 +149,17 @@ export default async function MapPage() {
   ]);
 
   return (
-    <div className="space-y-6">
-      <div className="animate-fade-in">
+    <div className="h-[calc(100vh-100px)]">
+      <div className="mb-4">
         <h1 className="font-[var(--font-serif)] text-4xl italic text-[var(--text-primary)]">
           Map View
         </h1>
-        <p className="mt-2 text-[var(--text-secondary)]">
-          Explore listings and travel times on the map
+        <p className="mt-1 text-[var(--text-secondary)]">
+          Explore listings and travel destinations
         </p>
       </div>
 
-      <div className="animate-fade-in" style={{ opacity: 0, animationDelay: '0.2s' }}>
-        <ListingsMap listings={listings} destinations={destinations} />
-      </div>
-
-      {/* Quick stats below map */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in" style={{ opacity: 0, animationDelay: '0.4s' }}>
-        <div className="bg-[var(--bg-secondary)] border border-[var(--border)] rounded-lg p-4">
-          <p className="text-sm text-[var(--text-secondary)]">Total Listings</p>
-          <p className="text-2xl font-semibold text-[var(--text-primary)]">{listings.length}</p>
-        </div>
-        <div className="bg-[var(--bg-secondary)] border border-[var(--border)] rounded-lg p-4">
-          <p className="text-sm text-[var(--text-secondary)]">With Travel Data</p>
-          <p className="text-2xl font-semibold text-[var(--text-primary)]">
-            {listings.filter(l => l.travel_times.length > 0).length}
-          </p>
-        </div>
-        <div className="bg-[var(--bg-secondary)] border border-[var(--border)] rounded-lg p-4">
-          <p className="text-sm text-[var(--text-secondary)]">Avg Bedrooms</p>
-          <p className="text-2xl font-semibold text-[var(--text-primary)]">
-            {listings.length > 0 
-              ? (listings.reduce((sum, l) => sum + l.bedrooms, 0) / listings.length).toFixed(1)
-              : 0}
-          </p>
-        </div>
-        <div className="bg-[var(--bg-secondary)] border border-[var(--border)] rounded-lg p-4">
-          <p className="text-sm text-[var(--text-secondary)]">Avg Sqft</p>
-          <p className="text-2xl font-semibold text-[var(--text-primary)]">
-            {listings.length > 0 
-              ? Math.round(listings.reduce((sum, l) => sum + l.sqft, 0) / listings.length).toLocaleString()
-              : 0}
-          </p>
-        </div>
-      </div>
+      <MapPageClient listings={listings} destinations={destinations} />
     </div>
   );
 }
